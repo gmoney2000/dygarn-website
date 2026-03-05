@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DyGarn Solutions — AI Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:     #050c1a;
+      --bg-surface:  #0d1b2e;
+      --bg-elevated: #142034;
+      --bg-float:    #1c2d44;
+      --accent:      #4db8ff;
+      --accent-lt:   #7dd3fc;
+      --accent-br:   #00d4ff;
+      --chrome:      #94a3b8;
+      --chrome-lt:   #cbd5e1;
+      --text:        #e2e8f0;
+      --text-muted:  #64748b;
+      --border:      rgba(77,184,255,0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── Noise grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Typography helpers ── */
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-cinzel-deco { font-family: 'Cinzel Decorative', serif; }
+
+    .chrome-text {
+      background: linear-gradient(135deg, #94a3b8 0%, #e2e8f0 25%, #cbd5e1 50%, #94a3b8 75%, #4db8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .blue-text {
+      background: linear-gradient(135deg, #4db8ff 0%, #7dd3fc 55%, #00d4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Circuit grid ── */
+    .circuit-bg {
+      background-image:
+        linear-gradient(rgba(77,184,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77,184,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* ── Glow helpers ── */
+    .glow-blue { text-shadow: 0 0 24px rgba(77,184,255,0.55), 0 0 60px rgba(77,184,255,0.25); }
+    .glow-box {
+      box-shadow:
+        0 0 0 1px rgba(77,184,255,0.18),
+        0 4px 24px rgba(0,0,0,0.55),
+        0 0 50px rgba(77,184,255,0.07),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a5a8a 0%, #0d3a5e 60%, #0a2d4a 100%);
+      border: 1px solid rgba(77,184,255,0.45);
+      color: #7dd3fc;
+      box-shadow: 0 4px 20px rgba(77,184,255,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 36px rgba(77,184,255,0.32), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+    .btn-primary:focus-visible { outline: 2px solid #4db8ff; outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(77,184,255,0.28);
+      color: #94a3b8;
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: rgba(77,184,255,0.6); color: #7dd3fc; transform: translateY(-2px); }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid #4db8ff; outline-offset: 3px; }
+
+    /* ── Nav ── */
+    nav {
+      background: rgba(5,12,26,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-link {
+      color: #64748b;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #7dd3fc; }
+    .nav-link:focus-visible { outline: 2px solid #4db8ff; outline-offset: 2px; color: #7dd3fc; }
+
+    /* ── Service cards ── */
+    .service-card {
+      background: linear-gradient(145deg, rgba(20,32,52,0.95) 0%, rgba(13,27,46,0.95) 100%);
+      border: 1px solid rgba(77,184,255,0.16);
+      border-top: 2px solid rgba(77,184,255,0.2);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(77,184,255,0.4);
+      border-top-color: rgba(77,184,255,0.7);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 48px rgba(77,184,255,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* ── Icon ring ── */
+    .icon-ring {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(77,184,255,0.3);
+      background: radial-gradient(ellipse at center, rgba(77,184,255,0.12) 0%, rgba(13,27,46,0.9) 70%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 20px rgba(77,184,255,0.15), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* ── Step number ── */
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(77,184,255,0.45);
+      background: linear-gradient(135deg, rgba(26,90,138,0.6), rgba(13,27,46,0.95));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 28px rgba(77,184,255,0.28), 0 0 0 4px rgba(77,184,255,0.06);
+    }
+
+    /* ── Testimonial card ── */
+    .testi-card {
+      background: linear-gradient(145deg, rgba(20,32,52,0.9) 0%, rgba(13,27,46,0.9) 100%);
+      border: 1px solid rgba(77,184,255,0.16);
+      border-top: 2px solid rgba(77,184,255,0.3);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .testi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 36px rgba(77,184,255,0.1);
+    }
+
+    /* ── Stat card ── */
+    .stat-card {
+      background: linear-gradient(145deg, rgba(20,32,52,0.9), rgba(13,27,46,0.95));
+      border: 1px solid rgba(77,184,255,0.22);
+      box-shadow: 0 0 0 1px rgba(77,184,255,0.06), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(77,184,255,0.3), 0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(77,184,255,0.1);
+    }
+
+    /* ══════════════════════════════════════════
+       CIRCUIT BACKGROUND SYSTEM
+       REVERT: delete this entire block and
+       remove class="circuit-bg pcb-traces" from
+       all <section> tags (leave only the ones
+       that originally had circuit-bg).
+       Also delete circuit-pattern.svg if desired.
+    ══════════════════════════════════════════ */
+
+    /* Graph-paper grid — now on every section */
+    .circuit-bg {
+      background-image:
+        linear-gradient(rgba(77,184,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77,184,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* PCB circuit trace overlay — tiled SVG file */
+    .pcb-traces {
+      position: relative;
+    }
+    .pcb-traces::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('/circuit-pattern.svg');
+      background-size: 900px 600px;
+      background-repeat: repeat;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .pcb-traces > * { position: relative; z-index: 1; }
+    /* ══ END CIRCUIT BACKGROUND SYSTEM ══ */
+
+    /* ── Section divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(77,184,255,0.3) 50%, transparent 100%);
+    }
+
+    /* ── Animations ── */
+    @keyframes pulse-glow { 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
+    @keyframes float-up  { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+    @keyframes spin-slow { from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+    @keyframes spin-rev  { from{ transform:rotate(0deg); } to{ transform:rotate(-360deg); } }
+    @keyframes fade-in-up{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:translateY(0); } }
+
+    .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    .float-anim { animation: float-up 6s ease-in-out infinite; }
+    .spin-slow  { animation: spin-slow 24s linear infinite; }
+    .spin-rev   { animation: spin-rev  18s linear infinite; }
+    .fade-in    { animation: fade-in-up 0.8s ease both; }
+
+    /* ── FAQ ── */
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] .chevron { transform: rotate(180deg); }
+    details[open] { border-color: rgba(77,184,255,0.28) !important; box-shadow: 0 0 24px rgba(77,184,255,0.06); }
+    details summary:hover { color: #cbd5e1; }
+    .chevron { transition: transform 0.25s ease; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: rgba(77,184,255,0.25); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Logo + wordmark -->
+    <a href="#" class="flex items-center gap-3 group" style="text-decoration:none;">
+      <div class="relative">
+        <img
+          src="/brand_assets/corner_logo.jpeg"
+          alt="DyGarn Solutions Logo"
+          class="w-16 h-16 rounded-full object-cover"
+          style="border: 1px solid rgba(77,184,255,0.35); box-shadow: 0 0 18px rgba(77,184,255,0.3);"
+        >
+      </div>
+      <span class="font-cinzel-deco text-xl chrome-text font-bold hidden sm:block" style="letter-spacing:0.04em;">DyGarn Solutions</span>
+    </a>
+
+    <!-- Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="nav-link font-cinzel">Services</a>
+      <a href="#process"  class="nav-link font-cinzel">Process</a>
+      <a href="#why-us"   class="nav-link font-cinzel">Why Us</a>
+      <a href="#faq"      class="nav-link font-cinzel">FAQ</a>
+      <a href="#contact"  class="nav-link font-cinzel">Contact</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="#contact" class="btn-primary font-cinzel px-6 py-2.5 rounded-sm text-xs" style="letter-spacing:0.16em;">
+      Get Started
+    </a>
+
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-20 overflow-hidden circuit-bg pcb-traces">
+
+  <!-- Radial ambient glows -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]" style="background:radial-gradient(ellipse, rgba(77,184,255,0.07) 0%, transparent 68%);"></div>
+    <div class="absolute -bottom-32 left-1/4 w-[500px] h-[500px]" style="background:radial-gradient(ellipse, rgba(30,80,140,0.1) 0%, transparent 70%);"></div>
+    <div class="absolute top-10 right-1/5 w-[280px] h-[280px]" style="background:radial-gradient(ellipse, rgba(77,184,255,0.05) 0%, transparent 70%);"></div>
+  </div>
+
+  <!-- Decorative gear SVGs -->
+  <div class="absolute top-20 right-12 opacity-10 spin-slow hidden xl:block" aria-hidden="true">
+    <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="30" stroke="#4db8ff" stroke-width="2"/>
+      <circle cx="50" cy="50" r="18" stroke="#4db8ff" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="6" fill="#4db8ff" opacity="0.5"/>
+      <path d="M50 14 L53 20 L47 20 Z" fill="#4db8ff"/>
+      <path d="M50 86 L53 80 L47 80 Z" fill="#4db8ff"/>
+      <path d="M14 50 L20 53 L20 47 Z" fill="#4db8ff"/>
+      <path d="M86 50 L80 53 L80 47 Z" fill="#4db8ff"/>
+      <path d="M22.5 22.5 L28 25 L25 28 Z" fill="#4db8ff"/>
+      <path d="M77.5 77.5 L72 75 L75 72 Z" fill="#4db8ff"/>
+      <path d="M77.5 22.5 L75 28 L72 25 Z" fill="#4db8ff"/>
+      <path d="M22.5 77.5 L25 72 L28 75 Z" fill="#4db8ff"/>
+    </svg>
+  </div>
+  <div class="absolute bottom-32 left-10 opacity-8 spin-rev hidden xl:block" aria-hidden="true">
+    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="30" stroke="#7dd3fc" stroke-width="2"/>
+      <circle cx="50" cy="50" r="16" stroke="#7dd3fc" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="5" fill="#7dd3fc" opacity="0.4"/>
+      <path d="M50 14 L53 20 L47 20 Z" fill="#7dd3fc"/>
+      <path d="M50 86 L53 80 L47 80 Z" fill="#7dd3fc"/>
+      <path d="M14 50 L20 53 L20 47 Z" fill="#7dd3fc"/>
+      <path d="M86 50 L80 53 L80 47 Z" fill="#7dd3fc"/>
+    </svg>
+  </div>
+
+  <!-- ── Banner image ── -->
+  <div class="relative z-10 w-full max-w-3xl mx-auto px-6 mb-12">
+    <div class="relative" style="border-radius:3px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
+      <img
+        src="/brand_assets/Dygarnbanner.jpeg"
+        alt="DyGarn Solutions"
+        class="w-full block"
+        style="border:1px solid rgba(77,184,255,0.12); border-radius:3px; filter: brightness(0.82) saturate(0.6) contrast(1.06);"
+      >
+      <!-- Blue multiply wash — kills brown, shifts to cool tone -->
+      <div class="absolute inset-0" style="border-radius:3px; background: rgba(10,40,100,0.32); mix-blend-mode: multiply;"></div>
+      <!-- Blue screen highlight — makes blue tones pop/glow -->
+      <div class="absolute inset-0" style="border-radius:3px; background: rgba(30,90,200,0.18); mix-blend-mode: screen;"></div>
+      <!-- Vignette: fades all four edges into background -->
+      <div class="absolute inset-0" style="border-radius:3px; background: radial-gradient(ellipse at center, transparent 40%, rgba(5,12,26,0.38) 72%, rgba(5,12,26,0.82) 100%);"></div>
+      <!-- Top/bottom fades -->
+      <div class="absolute inset-0" style="border-radius:3px; background: linear-gradient(180deg, rgba(5,12,26,0.55) 0%, transparent 20%, transparent 80%, rgba(5,12,26,0.75) 100%);"></div>
+      <!-- Left/right fades — right side extended further -->
+      <div class="absolute inset-0" style="border-radius:3px; background: linear-gradient(90deg, rgba(5,12,26,0.45) 0%, transparent 14%, transparent 72%, rgba(5,12,26,0.7) 100%);"></div>
+    </div>
+  </div>
+
+  <!-- ── Hero copy ── -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-5 pulse-glow">
+      Intelligent Systems · Automated Excellence
+    </p>
+
+    <h1 class="font-cinzel font-bold mb-6" style="font-size:clamp(2rem,5vw,3.5rem); letter-spacing:-0.02em; line-height:1.15;">
+      <span class="chrome-text">Transform Your Business</span><br>
+      With <span class="blue-text">Cutting-Edge AI</span>
+    </h1>
+
+    <p class="text-slate-400 mb-10 mx-auto" style="font-size:clamp(1rem,1.8vw,1.2rem); max-width:600px; line-height:1.78;">
+      DyGarn Solutions crafts bespoke AI automation systems, intelligent chatbots, and data-driven workflows that slash costs, save time, and unlock growth you never thought possible.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#contact" class="btn-primary font-cinzel px-10 py-4 rounded-sm text-xs" style="letter-spacing:0.18em;">
+        Book a Free Strategy Call
+      </a>
+      <a href="#services" class="btn-ghost font-cinzel px-10 py-4 rounded-sm text-xs" style="letter-spacing:0.18em;">
+        Explore Services
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="opacity:0.35;" aria-hidden="true">
+    <span class="font-cinzel text-xs tracking-widest text-slate-500 uppercase">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-sky-400 to-transparent"></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     STATS BAR
+════════════════════════════════════════════ -->
+<section class="circuit-bg pcb-traces" style="background: rgba(13,27,46,0.6); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+
+    <div class="stat-card rounded-sm p-6 text-center glow-box">
+      <p class="font-cinzel-deco font-bold blue-text mb-2" style="font-size:3rem; line-height:1; text-shadow:0 0 30px rgba(77,184,255,0.45);">50+</p>
+      <p class="font-cinzel text-xs text-slate-500 uppercase tracking-widest">AI Projects Delivered</p>
+    </div>
+    <div class="stat-card rounded-sm p-6 text-center">
+      <p class="font-cinzel-deco font-bold blue-text mb-2" style="font-size:3rem; line-height:1; text-shadow:0 0 30px rgba(77,184,255,0.45);">95%</p>
+      <p class="font-cinzel text-xs text-slate-500 uppercase tracking-widest">Client Satisfaction</p>
+    </div>
+    <div class="stat-card rounded-sm p-6 text-center">
+      <p class="font-cinzel-deco font-bold blue-text mb-2" style="font-size:3rem; line-height:1; text-shadow:0 0 30px rgba(77,184,255,0.45);">10×</p>
+      <p class="font-cinzel text-xs text-slate-500 uppercase tracking-widest">Average ROI Increase</p>
+    </div>
+    <div class="stat-card rounded-sm p-6 text-center">
+      <p class="font-cinzel-deco font-bold blue-text mb-2" style="font-size:3rem; line-height:1; text-shadow:0 0 30px rgba(77,184,255,0.45);">24/7</p>
+      <p class="font-cinzel text-xs text-slate-500 uppercase tracking-widest">Automated Operations</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════════ -->
+<section id="services" class="py-24 px-6 circuit-bg pcb-traces relative overflow-hidden">
+
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px]" style="background:radial-gradient(ellipse at bottom right, rgba(77,184,255,0.06) 0%, transparent 70%);"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">What We Offer</p>
+      <h2 class="font-cinzel font-bold chrome-text mb-4" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">Our AI Services</h2>
+      <p class="text-slate-500 max-w-xl mx-auto" style="line-height:1.75;">From intelligent automation to strategic AI consulting — we build the systems that run while you sleep.</p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">AI Workflow Automation</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">We map your existing processes and rebuild them with intelligent automation — eliminating manual tasks, reducing errors, and freeing your team for high-value work.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10h8M8 14h5" stroke="#4db8ff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">Custom AI Chatbots</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Deploy intelligent conversational agents trained on your data — for customer support, lead qualification, sales, or internal knowledge management.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path d="M18 20V10M12 20V4M6 20v-6" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">Data Intelligence</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Transform raw data into strategic insight. We build AI-powered analytics pipelines, dashboards, and predictive models that surface the patterns you need to act on.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" stroke="#4db8ff" stroke-width="1.8"/>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">AI Strategy Consulting</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Not sure where to start with AI? We audit your business, identify the highest-impact opportunities, and deliver a clear implementation roadmap tailored to your goals.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="6" height="6" rx="1" stroke="#4db8ff" stroke-width="1.8"/>
+            <rect x="16" y="3" width="6" height="6" rx="1" stroke="#4db8ff" stroke-width="1.8"/>
+            <rect x="9" y="15" width="6" height="6" rx="1" stroke="#4db8ff" stroke-width="1.8"/>
+            <path d="M5 9v3a7 7 0 0 0 7 7M19 9v3a7 7 0 0 1-7 7" stroke="#4db8ff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">System Integration</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">We connect your existing tools — CRMs, ERPs, APIs, databases — into a seamless AI-enhanced ecosystem so everything communicates and automates together.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card rounded-sm p-8">
+        <div class="icon-ring mb-5">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">AI Content Systems</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Build automated content pipelines — from AI-generated copy and social posts to SEO optimization and personalized email sequences — all trained on your brand voice.</p>
+        <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
+          <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     HOW WE WORK (PROCESS)
+════════════════════════════════════════════ -->
+<section id="process" class="py-24 px-6 circuit-bg pcb-traces" style="background: rgba(13,27,46,0.4);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">How We Work</p>
+      <h2 class="font-cinzel font-bold chrome-text mb-4" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">Our Process</h2>
+      <p class="text-slate-500 max-w-xl mx-auto" style="line-height:1.75;">Four focused phases — from discovery to deployment — ensuring every solution is precise, powerful, and built to last.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+      <!-- Step 1 -->
+      <div class="text-center relative">
+        <div class="flex justify-center mb-5">
+          <div class="step-num">
+            <span class="font-cinzel-deco font-bold text-lg blue-text">1</span>
+          </div>
+        </div>
+        <!-- connector line (desktop) -->
+        <div class="hidden md:block absolute top-6 left-[calc(50%+26px)] right-0 h-px" style="background:linear-gradient(90deg, rgba(77,184,255,0.35), rgba(77,184,255,0.08));"></div>
+        <h3 class="font-cinzel font-bold text-base chrome-text mb-3">Discovery</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">We deep-dive into your business, goals, and pain points to map exactly where AI can deliver the greatest impact.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center relative">
+        <div class="flex justify-center mb-5">
+          <div class="step-num">
+            <span class="font-cinzel-deco font-bold text-lg blue-text">2</span>
+          </div>
+        </div>
+        <div class="hidden md:block absolute top-6 left-[calc(50%+26px)] right-0 h-px" style="background:linear-gradient(90deg, rgba(77,184,255,0.35), rgba(77,184,255,0.08));"></div>
+        <h3 class="font-cinzel font-bold text-base chrome-text mb-3">Strategy</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">We architect a custom AI roadmap — choosing the right models, tools, and integrations to match your exact requirements.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center relative">
+        <div class="flex justify-center mb-5">
+          <div class="step-num">
+            <span class="font-cinzel-deco font-bold text-lg blue-text">3</span>
+          </div>
+        </div>
+        <div class="hidden md:block absolute top-6 left-[calc(50%+26px)] right-0 h-px" style="background:linear-gradient(90deg, rgba(77,184,255,0.35), rgba(77,184,255,0.08));"></div>
+        <h3 class="font-cinzel font-bold text-base chrome-text mb-3">Build</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Our engineers develop, test, and refine your AI systems — with regular check-ins and transparent progress at every stage.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="text-center">
+        <div class="flex justify-center mb-5">
+          <div class="step-num">
+            <span class="font-cinzel-deco font-bold text-lg blue-text">4</span>
+          </div>
+        </div>
+        <h3 class="font-cinzel font-bold text-base chrome-text mb-3">Launch & Scale</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">We deploy, monitor, and continuously optimize your system — and stay by your side as your business grows and evolves.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     WHY DYGARN
+════════════════════════════════════════════ -->
+<section id="why-us" class="py-24 px-6 circuit-bg pcb-traces relative overflow-hidden">
+
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px]" style="background:radial-gradient(ellipse at top left, rgba(77,184,255,0.06) 0%, transparent 70%);"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: logo hero -->
+      <div class="flex justify-center">
+        <div class="relative">
+          <div class="absolute inset-0 rounded-full" style="background:radial-gradient(ellipse, rgba(77,184,255,0.18) 0%, transparent 70%); transform:scale(1.4);"></div>
+          <img
+            src="/brand_assets/final logo .jpeg"
+            alt="DyGarn Solutions"
+            class="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full object-cover float-anim"
+            style="border:2px solid rgba(77,184,255,0.4); box-shadow: 0 0 60px rgba(77,184,255,0.3), 0 0 120px rgba(77,184,255,0.12), 0 24px 60px rgba(0,0,0,0.6);"
+          >
+        </div>
+      </div>
+
+      <!-- Right: features -->
+      <div>
+        <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">Why DyGarn</p>
+        <h2 class="font-cinzel font-bold chrome-text mb-8" style="font-size:clamp(1.8rem,3.5vw,2.6rem); letter-spacing:-0.02em; line-height:1.2;">Built Different.<br>Built to Deliver.</h2>
+
+        <div class="space-y-6">
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-sm flex items-center justify-center" style="background:rgba(77,184,255,0.1); border:1px solid rgba(77,184,255,0.25);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#4db8ff" stroke-width="1.5"/></svg>
+            </div>
+            <div>
+              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Fully Custom Solutions</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">No templates, no one-size-fits-all. Every system is engineered from the ground up for your specific business context.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-sm flex items-center justify-center" style="background:rgba(77,184,255,0.1); border:1px solid rgba(77,184,255,0.25);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Fast Deployment</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">We move quickly without cutting corners. Most clients see their first AI systems live within 2–4 weeks of kickoff.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-sm flex items-center justify-center" style="background:rgba(77,184,255,0.1); border:1px solid rgba(77,184,255,0.25);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#4db8ff" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Ongoing Partnership</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">We don't disappear post-launch. Your success is our success — with continuous support, optimization, and growth planning.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-sm flex items-center justify-center" style="background:rgba(77,184,255,0.1); border:1px solid rgba(77,184,255,0.25);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#4db8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Enterprise-Grade Security</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">All systems are built with security-first principles. Your data stays private, protected, and fully under your control.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section class="py-24 px-6 circuit-bg pcb-traces" style="background: rgba(13,27,46,0.35);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">Testimonials</p>
+      <h2 class="font-cinzel font-bold chrome-text" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">What Clients Say</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="testi-card rounded-sm p-7 glow-box">
+        <div class="flex gap-1 mb-5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">"DyGarn automated our entire lead qualification pipeline. What used to take our team 3 hours daily now runs itself, and our conversion rate jumped 40%."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-cinzel font-bold text-sm" style="background:linear-gradient(135deg,rgba(26,90,138,0.6),rgba(13,27,46,0.9)); border:1px solid rgba(77,184,255,0.3); color:#7dd3fc;">J</div>
+          <div>
+            <p class="font-cinzel font-bold text-sm chrome-text">James R.</p>
+            <p class="text-slate-600 text-xs">Founder, VelocityReach</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card rounded-sm p-7 glow-box">
+        <div class="flex gap-1 mb-5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">"The custom chatbot they built handles 80% of our customer queries without human intervention. It's like having a team member who works 24/7 and never gets tired."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-cinzel font-bold text-sm" style="background:linear-gradient(135deg,rgba(26,90,138,0.6),rgba(13,27,46,0.9)); border:1px solid rgba(77,184,255,0.3); color:#7dd3fc;">S</div>
+          <div>
+            <p class="font-cinzel font-bold text-sm chrome-text">Sarah M.</p>
+            <p class="text-slate-600 text-xs">COO, NexGen Retail</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card rounded-sm p-7 glow-box">
+        <div class="flex gap-1 mb-5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#4db8ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">"From strategy to deployment in just 3 weeks. The ROI was immediate — we cut operational costs by 35% in the first month. DyGarn doesn't just promise results, they deliver."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-cinzel font-bold text-sm" style="background:linear-gradient(135deg,rgba(26,90,138,0.6),rgba(13,27,46,0.9)); border:1px solid rgba(77,184,255,0.3); color:#7dd3fc;">M</div>
+          <div>
+            <p class="font-cinzel font-bold text-sm chrome-text">Marcus T.</p>
+            <p class="text-slate-600 text-xs">CEO, Pinnacle Ops</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════ -->
+<section id="faq" class="py-24 px-6 circuit-bg pcb-traces">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">Common Questions</p>
+      <h2 class="font-cinzel font-bold chrome-text" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">FAQ</h2>
+    </div>
+
+    <div class="space-y-3">
+
+      <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
+        <summary class="flex items-center justify-between p-6 font-cinzel font-bold text-sm chrome-text" style="letter-spacing:0.02em;">
+          Do I need technical knowledge to work with you?
+          <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Not at all. We handle all the technical complexity — you just need to know your business goals. We translate your needs into working AI solutions and guide you through every step.</p>
+      </details>
+
+      <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
+        <summary class="flex items-center justify-between p-6 font-cinzel font-bold text-sm chrome-text" style="letter-spacing:0.02em;">
+          How long does a typical project take?
+          <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Most initial AI systems are live within 2–6 weeks depending on scope and complexity. We'll give you a precise timeline after your strategy call — and we stick to it.</p>
+      </details>
+
+      <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
+        <summary class="flex items-center justify-between p-6 font-cinzel font-bold text-sm chrome-text" style="letter-spacing:0.02em;">
+          What kinds of businesses do you work with?
+          <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">We work with businesses of all sizes — from growing startups to established enterprises — across industries including e-commerce, professional services, real estate, healthcare, and more.</p>
+      </details>
+
+      <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
+        <summary class="flex items-center justify-between p-6 font-cinzel font-bold text-sm chrome-text" style="letter-spacing:0.02em;">
+          Is my data safe and private?
+          <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Absolutely. We build with security-first architecture and follow industry best practices for data protection. Your data is never shared, sold, or used to train public models.</p>
+      </details>
+
+      <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
+        <summary class="flex items-center justify-between p-6 font-cinzel font-bold text-sm chrome-text" style="letter-spacing:0.02em;">
+          What's the investment to get started?
+          <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Pricing depends on the scope and complexity of your project. Book a free strategy call and we'll give you transparent, honest pricing — no surprises, no hidden fees.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     CTA / CONTACT
+════════════════════════════════════════════ -->
+<section id="contact" class="py-28 px-6 circuit-bg pcb-traces relative overflow-hidden">
+
+  <!-- Background glows -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at center, rgba(77,184,255,0.08) 0%, transparent 65%);"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px" style="background:linear-gradient(90deg, transparent, rgba(77,184,255,0.3), transparent);"></div>
+  </div>
+
+  <div class="max-w-3xl mx-auto text-center relative z-10">
+
+    <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full" style="background:rgba(77,184,255,0.08); border:1px solid rgba(77,184,255,0.2);">
+      <div class="w-2 h-2 rounded-full pulse-glow" style="background:#4db8ff;"></div>
+      <span class="font-cinzel text-xs text-sky-400 tracking-widest uppercase">Now Taking New Clients</span>
+    </div>
+
+    <h2 class="font-cinzel font-bold chrome-text mb-5" style="font-size:clamp(2rem,5vw,3.2rem); letter-spacing:-0.02em; line-height:1.15;">
+      Ready to Build Your<br><span class="blue-text">AI-Powered Future?</span>
+    </h2>
+
+    <p class="text-slate-400 mb-10 mx-auto" style="max-width:520px; line-height:1.78;">
+      Book a free, no-pressure strategy call with our team. We'll assess your business, identify your biggest AI opportunities, and show you exactly what's possible.
+    </p>
+
+    <!-- Contact form -->
+    <div class="rounded-sm p-8 md:p-10 text-left glow-box" style="background:linear-gradient(145deg, rgba(20,32,52,0.95), rgba(13,27,46,0.95)); border:1px solid rgba(77,184,255,0.15);">
+
+      <div class="grid md:grid-cols-2 gap-5 mb-5">
+        <div>
+          <label class="block font-cinzel text-xs text-slate-500 uppercase tracking-widest mb-2">Full Name</label>
+          <input type="text" placeholder="Your name"
+            class="w-full px-4 py-3 rounded-sm text-sm text-slate-300 placeholder-slate-600 outline-none transition-all"
+            style="background:rgba(5,12,26,0.8); border:1px solid rgba(77,184,255,0.15); font-family:'Inter',sans-serif;"
+            onfocus="this.style.borderColor='rgba(77,184,255,0.45)'; this.style.boxShadow='0 0 0 3px rgba(77,184,255,0.08)';"
+            onblur="this.style.borderColor='rgba(77,184,255,0.15)'; this.style.boxShadow='none';"
+          >
+        </div>
+        <div>
+          <label class="block font-cinzel text-xs text-slate-500 uppercase tracking-widest mb-2">Email Address</label>
+          <input type="email" placeholder="you@company.com"
+            class="w-full px-4 py-3 rounded-sm text-sm text-slate-300 placeholder-slate-600 outline-none transition-all"
+            style="background:rgba(5,12,26,0.8); border:1px solid rgba(77,184,255,0.15); font-family:'Inter',sans-serif;"
+            onfocus="this.style.borderColor='rgba(77,184,255,0.45)'; this.style.boxShadow='0 0 0 3px rgba(77,184,255,0.08)';"
+            onblur="this.style.borderColor='rgba(77,184,255,0.15)'; this.style.boxShadow='none';"
+          >
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label class="block font-cinzel text-xs text-slate-500 uppercase tracking-widest mb-2">Business Name</label>
+        <input type="text" placeholder="Your company"
+          class="w-full px-4 py-3 rounded-sm text-sm text-slate-300 placeholder-slate-600 outline-none transition-all"
+          style="background:rgba(5,12,26,0.8); border:1px solid rgba(77,184,255,0.15); font-family:'Inter',sans-serif;"
+          onfocus="this.style.borderColor='rgba(77,184,255,0.45)'; this.style.boxShadow='0 0 0 3px rgba(77,184,255,0.08)';"
+          onblur="this.style.borderColor='rgba(77,184,255,0.15)'; this.style.boxShadow='none';"
+        >
+      </div>
+
+      <div class="mb-7">
+        <label class="block font-cinzel text-xs text-slate-500 uppercase tracking-widest mb-2">What Can We Help With?</label>
+        <textarea rows="4" placeholder="Tell us about your business and what you're hoping to achieve with AI..."
+          class="w-full px-4 py-3 rounded-sm text-sm text-slate-300 placeholder-slate-600 outline-none transition-all resize-none"
+          style="background:rgba(5,12,26,0.8); border:1px solid rgba(77,184,255,0.15); font-family:'Inter',sans-serif;"
+          onfocus="this.style.borderColor='rgba(77,184,255,0.45)'; this.style.boxShadow='0 0 0 3px rgba(77,184,255,0.08)';"
+          onblur="this.style.borderColor='rgba(77,184,255,0.15)'; this.style.boxShadow='none';"
+        ></textarea>
+      </div>
+
+      <button class="btn-primary font-cinzel w-full py-4 rounded-sm text-xs" style="letter-spacing:0.2em;">
+        Book My Free Strategy Call
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background: rgba(5,12,26,0.95); border-top:1px solid var(--border);">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+
+    <div class="grid md:grid-cols-3 gap-10 mb-10">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="/brand_assets/corner_logo.jpeg" alt="DyGarn" class="w-20 h-20 rounded-full object-cover" style="border:1px solid rgba(77,184,255,0.3);">
+          <span class="font-cinzel-deco text-xl chrome-text font-bold">DyGarn Solutions</span>
+        </div>
+        <p class="text-slate-600 text-sm leading-relaxed max-w-xs">Engineering intelligent systems that power the businesses of tomorrow.</p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <p class="font-cinzel text-xs text-sky-400 uppercase tracking-widest mb-4">Navigation</p>
+        <div class="space-y-2">
+          <a href="#services" class="block text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">Services</a>
+          <a href="#process"  class="block text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">Process</a>
+          <a href="#why-us"   class="block text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">Why Us</a>
+          <a href="#faq"      class="block text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">FAQ</a>
+          <a href="#contact"  class="block text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">Contact</a>
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div>
+        <p class="font-cinzel text-xs text-sky-400 uppercase tracking-widest mb-4">Get in Touch</p>
+        <div class="space-y-3">
+          <a href="mailto:hello@dygarnsolutions.com" class="flex items-center gap-2 text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#4db8ff" stroke-width="1.5"/><polyline points="22,6 12,13 2,6" stroke="#4db8ff" stroke-width="1.5"/></svg>
+            hello@dygarnsolutions.com
+          </a>
+          <a href="#contact" class="flex items-center gap-2 text-slate-600 text-sm hover:text-slate-400 transition-colors" style="text-decoration:none;">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" stroke="#4db8ff" stroke-width="1.5"/></svg>
+            Book a Free Call
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pt-8" style="border-top:1px solid rgba(77,184,255,0.08);">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-slate-700 text-xs font-cinzel tracking-widest">© 2026 DyGarn Solutions. All Rights Reserved.</p>
+        <p class="text-slate-700 text-xs" style="font-family:'Inter',sans-serif;">Built with Intelligence. Delivered with Excellence.</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
