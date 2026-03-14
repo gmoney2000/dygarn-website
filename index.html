@@ -46,17 +46,21 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": "https://dygarn.com/#organization",
     "name": "DyGarn Solutions",
     "description": "Custom AI automation and consulting for small and mid-sized businesses",
     "url": "https://dygarn.com",
-    "logo": "https://dygarn.com/brand_assets/corner_logo.jpeg",
+    "logo": {
+      "@type": "ImageObject",
+      "@id": "https://dygarn.com/#logo",
+      "url": "https://dygarn.com/brand_assets/corner_logo.jpeg",
+      "contentUrl": "https://dygarn.com/brand_assets/corner_logo.jpeg",
+      "caption": "DyGarn Solutions Logo"
+    },
     "image": "https://dygarn.com/brand_assets/Dygarnbanner.jpeg",
     "email": "hello@dygarn.com",
     "founder": {
-      "@type": "Person",
-      "name": "Greg Drysdale",
-      "jobTitle": "Founder & AI Consultant",
-      "description": "Technical sales veteran with 27+ years of experience, specializing in AI automation for small business"
+      "@id": "https://dygarn.com/#person-greg-drysdale"
     },
     "address": {
       "@type": "PostalAddress",
@@ -65,13 +69,71 @@
     },
     "areaServed": [
       {"@type": "Country", "name": "Canada"},
-      {"@type": "AdministrativeArea", "name": "Nova Scotia"},
-      {"@type": "AdministrativeArea", "name": "New Brunswick"},
-      {"@type": "AdministrativeArea", "name": "Prince Edward Island"}
+      {"@type": "State", "name": "Nova Scotia"},
+      {"@type": "State", "name": "New Brunswick"},
+      {"@type": "State", "name": "Prince Edward Island"}
     ],
-    "knowsAbout": ["AI Automation", "AI Consulting", "Custom AI Systems", "AI Strategy", "Workflow Automation", "Invoice Automation", "AI Chatbots"],
     "priceRange": "$$",
-    "serviceType": ["AI Automation", "AI Consulting", "Custom AI Systems", "AI Strategy Consulting"]
+    "currenciesAccepted": "CAD",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "AI Services",
+      "itemListElement": [
+        {"@type": "Service", "name": "AI Workflow Automation", "description": "Map existing processes and rebuild with intelligent automation"},
+        {"@type": "Service", "name": "Custom AI Chatbots", "description": "Conversational agents trained on your data for support, sales, or internal knowledge"},
+        {"@type": "Service", "name": "Data Intelligence", "description": "AI-powered analytics, dashboards, and real-time KPIs"},
+        {"@type": "Service", "name": "AI Strategy Consulting", "description": "Business audit and implementation roadmap for AI adoption"},
+        {"@type": "Service", "name": "System Integration", "description": "Connect CRMs, ERPs, APIs, and databases into AI-enhanced ecosystems"},
+        {"@type": "Service", "name": "Invoice & Document Automation", "description": "AI reads invoices, flags discrepancies, reconciles payments"}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Structured Data: Founder -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://dygarn.com/#person-greg-drysdale",
+    "name": "Greg Drysdale",
+    "jobTitle": "Founder & AI Consultant",
+    "description": "AI automation consultant with 27+ years of technical sales experience, specializing in building custom AI systems for small and mid-sized businesses in Atlantic Canada.",
+    "url": "https://dygarn.com",
+    "worksFor": {
+      "@id": "https://dygarn.com/#organization"
+    },
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "AI Automation",
+      "AI Consulting",
+      "Workflow Automation",
+      "Small Business Technology",
+      "Technical Sales",
+      "System Integration",
+      "Data Intelligence"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Nova Scotia",
+      "addressCountry": "CA"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: Website -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://dygarn.com/#website",
+    "name": "DyGarn Solutions",
+    "url": "https://dygarn.com",
+    "description": "Custom AI automation and consulting for small and mid-sized businesses",
+    "publisher": {
+      "@id": "https://dygarn.com/#organization"
+    },
+    "inLanguage": "en-CA"
   }
   </script>
 
@@ -80,6 +142,7 @@
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://dygarn.com/#faq",
     "mainEntity": [
       {
         "@type": "Question",
@@ -501,7 +564,7 @@
     </h1>
 
     <p class="font-cinzel text-slate-400 mb-10 mx-auto" style="font-size:clamp(1rem,1.8vw,1.2rem); max-width:600px; line-height:1.78;">
-      I work directly with small and mid-sized businesses to find the bottlenecks, inefficiencies, and blind spots that are quietly costing you time and money - then I build custom AI systems that fix them. No templates. No generic solutions. Just tools built around how your business actually works.
+      I'm Greg Drysdale, founder of DyGarn Solutions — an AI automation and consulting firm based in Atlantic Canada. I work directly with small and mid-sized businesses to find the bottlenecks, inefficiencies, and blind spots that are quietly costing you time and money — then I build custom AI systems that fix them. No templates. No generic solutions. Just tools built around how your business actually works.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">

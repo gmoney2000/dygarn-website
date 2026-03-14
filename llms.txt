@@ -1,0 +1,40 @@
+# DyGarn Solutions
+
+> AI automation and consulting for small and medium-sized businesses in Atlantic Canada.
+
+## About
+DyGarn Solutions is an AI consulting and automation agency based in Nova Scotia, Canada, founded by Greg Drysdale. Greg has 27+ years of experience in technical sales across Atlantic Canada and specializes in helping SMBs (5-50 employees) adopt AI to reduce manual work, cut costs, and grow revenue. Every project is hands-on — clients work directly with Greg, not a team of account managers.
+
+## Services
+- AI Workflow Automation: Mapping and rebuilding business processes with intelligent automation ($2,000-$7,500 setup)
+- Custom AI Chatbots: Conversational agents trained on client data for support, sales, or internal knowledge
+- Data Intelligence: AI-powered analytics, dashboards, and real-time KPIs from existing business data
+- AI Strategy Consulting: Business audit and implementation roadmap for AI adoption
+- System Integration: Connecting CRMs, ERPs, APIs, and databases into AI-enhanced ecosystems
+- Invoice and Document Automation: AI reads invoices, flags discrepancies, reconciles payments
+
+## Process
+1. Discovery — Deep-dive into business goals, pain points, and current tools
+2. Strategy — Custom AI roadmap with model and tool selection
+3. Build — Development, testing, and refinement with transparent progress
+4. Launch & Scale — Live deployment with monitoring and optimization
+
+## Target Audience
+Small and medium-sized businesses (5-50 employees) in trades, construction, electrical distribution, manufacturing, professional services, and healthcare — primarily in Atlantic Canada (Nova Scotia, New Brunswick, Prince Edward Island).
+
+## Pricing
+- Setup: $2,000 - $7,500 CAD (one-time)
+- Monthly support: $1,000 - $2,500 CAD (ongoing optimization)
+- Free 45-minute AI Audit available — no pitch, no commitment
+
+## Industries Served
+Construction, electrical trades, manufacturers' representatives, distribution, professional services, healthcare, real estate
+
+## Contact
+- Website: https://dygarn.com
+- Email: hello@dygarn.com
+- Booking: https://calendly.com/greg-dygarn/30min
+- Location: Nova Scotia, Canada
+
+## Key Pages
+- Homepage: https://dygarn.com
