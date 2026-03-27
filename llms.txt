@@ -1,40 +1,47 @@
-# DyGarn Solutions
+# DyGarn Technical Solutions
 
-> AI automation and consulting for small and medium-sized businesses in Atlantic Canada.
+> We don't sell software. We sit down and learn your business. Custom AI consulting and workflow automation for growing businesses in Atlantic Canada.
 
 ## About
-DyGarn Solutions is an AI consulting and automation agency based in Nova Scotia, Canada, founded by Greg Drysdale. Greg has 27+ years of experience in technical sales across Atlantic Canada and specializes in helping SMBs (5-50 employees) adopt AI to reduce manual work, cut costs, and grow revenue. Every project is hands-on — clients work directly with Greg, not a team of account managers.
+DyGarn Technical Solutions is an AI consulting and automation firm based in Nova Scotia, Canada, founded by Greg Drysdale. Greg has 27+ years of experience in technical sales and the technology industry, and works directly with business owners to understand how their operation actually runs, then builds custom AI systems that relieve the pressure. Every project is hands-on -- clients work directly with Greg, not a team of account managers.
 
 ## Services
-- AI Workflow Automation: Mapping and rebuilding business processes with intelligent automation ($2,000-$7,500 setup)
-- Custom AI Chatbots: Conversational agents trained on client data for support, sales, or internal knowledge
-- Data Intelligence: AI-powered analytics, dashboards, and real-time KPIs from existing business data
-- AI Strategy Consulting: Business audit and implementation roadmap for AI adoption
-- System Integration: Connecting CRMs, ERPs, APIs, and databases into AI-enhanced ecosystems
-- Invoice and Document Automation: AI reads invoices, flags discrepancies, reconciles payments
+- AI Command Center: Custom-built central hub connecting tools, data, and teams across one or multiple businesses
+- AI Workflow Automation: Mapping and rebuilding business processes with intelligent automation
+- Custom Dashboards & KPIs: Real-time dashboards with drill-downs tailored to your business operations
+- AI Strategy & Discovery: Focused discovery conversation to find highest-impact AI opportunities
+- System Integration: Connect CRMs, accounting, email, scheduling, and field tools into one seamless ecosystem
+- Invoice & Document Automation: AI reads invoices, flags discrepancies, reconciles payments
 
 ## Process
-1. Discovery — Deep-dive into business goals, pain points, and current tools
-2. Strategy — Custom AI roadmap with model and tool selection
-3. Build — Development, testing, and refinement with transparent progress
-4. Launch & Scale — Live deployment with monitoring and optimization
+1. Discovery Call -- A conversation to hear your story, understand your goals, and find where the pressure is
+2. AI Audit -- We sit down with you and your team and dig into how your business actually runs
+3. Custom Proposal -- A plan built around your goals with real numbers from your real data
+4. Build -- Systems built around how your team actually works, training included
+5. Stay In Your Corner -- Ongoing partnership with regular check-ins, optimization, and new ideas as your business grows
 
 ## Target Audience
-Small and medium-sized businesses (5-50 employees) in trades, construction, electrical distribution, manufacturing, professional services, and healthcare — primarily in Atlantic Canada (Nova Scotia, New Brunswick, Prince Edward Island).
+Small and mid-sized business owners across all industries -- construction, trades, manufacturing, professional services, technology, and more. Primarily in Atlantic Canada (Nova Scotia, New Brunswick, Prince Edward Island), serving clients across Canada.
 
 ## Pricing
-- Setup: $2,000 - $7,500 CAD (one-time)
-- Monthly support: $1,000 - $2,500 CAD (ongoing optimization)
-- Free 45-minute AI Audit available — no pitch, no commitment
+- Discovery Call: Free 30-minute conversation, no commitment
+- AI Audit: $1,500 - $2,500 CAD (on-site assessment with detailed report)
+- Build: $3,500 - $8,000 CAD (one-time, scope-dependent)
+- Monthly Retainer: $1,250 - $3,000 CAD (ongoing optimization and support)
+- Government funding programs may cover 50-75% of project costs for qualifying Canadian businesses
 
-## Industries Served
-Construction, electrical trades, manufacturers' representatives, distribution, professional services, healthcare, real estate
+## Why DyGarn
+- 27+ years in technical sales and the technology industry
+- Custom-built systems, not off-the-shelf software
+- Atlantic Canada based, in-person service
+- Government funding may be available to offset project costs
 
 ## Contact
-- Website: https://dygarn.com
+- Website: [DyGarn Technical Solutions](https://dygarn.com): Homepage with services, process, and contact form
 - Email: hello@dygarn.com
-- Booking: https://calendly.com/greg-dygarn/30min
-- Location: Nova Scotia, Canada
+- Phone: 782-774-9733
+- Booking: [Book a Discovery Call](https://calendly.com/greg-dygarn/30min): Free 30-minute conversation
+- Location: Halifax, Nova Scotia, Canada
 
 ## Key Pages
-- Homepage: https://dygarn.com
+- [Homepage](https://dygarn.com): Services, process, about Greg, FAQ, and contact form
