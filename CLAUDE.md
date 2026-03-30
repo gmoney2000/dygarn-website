@@ -1,5 +1,11 @@
 # CLAUDE.md — Frontend Website Rules
 
+## Deployment
+- **Hosting:** Vercel — connected to `github.com/gmoney2000/dygarn-website`
+- **Auto-deploy:** Every push to `master` triggers a Vercel deploy automatically. No build step needed.
+- **Live site:** dygarn.com (domain pointed at Vercel)
+- **Deploy workflow:** Edit `index.html` → commit → `git push origin master` → live in ~30 seconds
+
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
