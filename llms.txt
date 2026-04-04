@@ -4,22 +4,22 @@
 
 ## Services
 
-- [AI Command Center](https://www.dygarn.com/#services): Central hub connecting your tools, data, and teams into one AI-powered operations dashboard with real-time visibility.
-- [AI Workflow Automation](https://www.dygarn.com/#services): Process mapping and intelligent automation that eliminates manual data entry, invoice processing, and repetitive admin tasks.
-- [Custom Dashboards & KPIs](https://www.dygarn.com/#services): Real-time business dashboards with drill-downs showing pipeline, revenue, expenses, and operational metrics.
-- [AI Strategy & Discovery](https://www.dygarn.com/#services): Structured discovery process to identify the highest-impact AI opportunities in your business with ROI projections.
-- [System Integration](https://www.dygarn.com/#services): Connect CRMs, accounting software, email, scheduling tools, and legacy systems into unified automated workflows.
-- [Invoice & Document Automation](https://www.dygarn.com/#services): AI-powered document reading, invoice reconciliation, and automated filing that catches pricing errors and saves hours weekly.
+- [AI Command Center](https://dygarn.com/#services): Central hub connecting your tools, data, and teams into one AI-powered operations dashboard with real-time visibility.
+- [AI Workflow Automation](https://dygarn.com/#services): Process mapping and intelligent automation that eliminates manual data entry, invoice processing, and repetitive admin tasks.
+- [Custom Dashboards & KPIs](https://dygarn.com/#services): Real-time business dashboards with drill-downs showing pipeline, revenue, expenses, and operational metrics.
+- [AI Strategy & Discovery](https://dygarn.com/#services): Structured discovery process to identify the highest-impact AI opportunities in your business with ROI projections.
+- [System Integration](https://dygarn.com/#services): Connect CRMs, accounting software, email, scheduling tools, and legacy systems into unified automated workflows.
+- [Invoice & Document Automation](https://dygarn.com/#services): AI-powered document reading, invoice reconciliation, and automated filing that catches pricing errors and saves hours weekly.
 
 ## Process
 
-- [Discovery Call](https://www.dygarn.com/#discovery): Free 30-minute call to understand your business operations, identify pain points, and map potential AI opportunities. No pitch, just diagnosis.
-- [How We Work](https://www.dygarn.com/#process): Five-step engagement from discovery through build and ongoing managed AI operations with monitoring and optimization.
+- [Discovery Call](https://dygarn.com/#discovery): Free 30-minute call to understand your business operations, identify pain points, and map potential AI opportunities. No pitch, just diagnosis.
+- [How We Work](https://dygarn.com/#process): Five-step engagement from discovery through build and ongoing managed AI operations with monitoring and optimization.
 
 ## About
 
-- [About Greg Drysdale](https://www.dygarn.com/#about): Founder with 27+ years in technical sales across electrical, industrial, and distribution sectors. Works directly with business owners, not through account managers.
-- [Why DyGarn](https://www.dygarn.com/#why-us): Custom-built systems (not off-the-shelf), Atlantic Canada based, in-person service, government funding guidance.
+- [About Greg Drysdale](https://dygarn.com/#about): Founder with 27+ years in technical sales across electrical, industrial, and distribution sectors. Works directly with business owners, not through account managers.
+- [Why DyGarn](https://dygarn.com/#why-us): Custom-built systems (not off-the-shelf), Atlantic Canada based, in-person service, government funding guidance.
 
 ## Key Facts
 
@@ -33,7 +33,7 @@
 
 ## Contact
 
-- Website: https://www.dygarn.com
+- Website: https://dygarn.com
 - Email: hello@dygarn.com
 - Phone: 782-774-9733
 - Book a Call: https://calendly.com/greg-dygarn/30min
