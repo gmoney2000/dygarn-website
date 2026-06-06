@@ -188,7 +188,7 @@
         "name": "Do I need to be technical to work with DyGarn?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not at all. I handle all the technical work. You just need to know your business. I'll figure out where AI fits."
+          "text": "Not at all. We handle all the technical work. You just need to know your business. We'll figure out where AI fits."
         }
       },
       {
@@ -228,7 +228,7 @@
         "name": "What happens in the discovery call?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A 30-minute conversation where I learn about your business, identify where AI fits, and give you honest answers about what's possible. No pitch, no commitment."
+          "text": "A 30-minute conversation where we learn about your business, identify where AI fits, and give you honest answers about what's possible. No pitch, no commitment."
         }
       }
     ]
@@ -487,6 +487,47 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg-base); }
     ::-webkit-scrollbar-thumb { background: rgba(77,184,255,0.25); border-radius: 3px; }
+    /* PadmaHQ nav link: copper/orange lotus tone matching padmahq.com brand mark */
+    .padma-nav { display: inline-flex; align-items: center; gap: 8px; }
+    .padma-mark { flex-shrink: 0; filter: drop-shadow(0 0 4px rgba(240,141,77,0.65)); }
+    .padma-nav {
+      position: relative;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: #ffd0a8;
+      letter-spacing: 0.10em;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(240,141,77,0.14), rgba(232,122,58,0.06));
+      border: 1px solid rgba(240,141,77,0.45);
+      text-shadow: 0 0 12px rgba(240,141,77,0.65), 0 0 22px rgba(232,122,58,0.30);
+      box-shadow: 0 0 18px rgba(240,141,77,0.22), inset 0 0 14px rgba(240,141,77,0.06);
+      transition: all 0.25s ease;
+      animation: padmaPulse 2.8s ease-in-out infinite;
+    }
+    .padma-nav::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 999px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,184,120,0.75), rgba(232,122,58,0.25), rgba(255,184,120,0.75));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .padma-nav:hover {
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(240,141,77,0.28), rgba(232,122,58,0.14));
+      border-color: rgba(240,141,77,0.80);
+      text-shadow: 0 0 14px rgba(255,184,120,0.95), 0 0 28px rgba(232,122,58,0.55);
+      box-shadow: 0 0 32px rgba(240,141,77,0.50), inset 0 0 18px rgba(240,141,77,0.12);
+      transform: translateY(-1px);
+    }
+    @keyframes padmaPulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(240,141,77,0.22), inset 0 0 14px rgba(240,141,77,0.06); }
+      50%      { box-shadow: 0 0 32px rgba(240,141,77,0.45), inset 0 0 18px rgba(240,141,77,0.12); }
+    }
   </style>
   <!-- First-party analytics: anonymous visit tracking. See ops.dygarn.com/dashboard/visitors -->
   <script src="https://ops.dygarn.com/track.js" defer></script>
@@ -503,19 +544,23 @@
     <a href="#" class="flex items-center gap-3 group" style="text-decoration:none;">
       <div class="relative">
         <img
-          src="/brand_assets/corner_logo.jpeg"
+          src="brand_assets/corner_logo.jpeg"
           alt="DyGarn Technical Solutions Logo"
           class="w-16 h-16 rounded-full object-cover"
           style="border: 1px solid rgba(77,184,255,0.35); box-shadow: 0 0 18px rgba(77,184,255,0.3);"
         >
       </div>
-      <span class="font-brand text-2xl chrome-text font-bold hidden sm:block">DyGarn Technical Solutions</span>
+      <span class="font-brand text-2xl chrome-text font-bold hidden xl:block">DyGarn Technical Solutions</span>
     </a>
 
     <!-- Links -->
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden md:flex items-center gap-6 lg:gap-7">
       <a href="#services"  class="nav-link font-cinzel">Services</a>
-      <a href="#discovery"  class="nav-link font-cinzel">Discovery Call</a>
+      <a href="#padma"     class="padma-nav font-cinzel" style="color:#f08d4d;">
+        <img src="brand_assets/padma-lotus.svg" alt="Padma" width="18" height="18" class="padma-mark">
+        <span>PadmaHQ</span>
+      </a>
+      <a href="#discovery"  class="nav-link font-cinzel">Discovery</a>
       <a href="#process"   class="nav-link font-cinzel">Process</a>
       <a href="#why-us"    class="nav-link font-cinzel">Why Us</a>
       <a href="#about"     class="nav-link font-cinzel">About</a>
@@ -585,7 +630,7 @@
         transform: translateY(-50%);
         width: clamp(250px, 35vw, 420px);
         height: clamp(250px, 35vw, 420px);
-        background-image: url('/brand_assets/final logo .jpeg');
+        background-image: url('brand_assets/final logo .jpeg');
         background-size: cover;
         background-position: center;
         opacity: 0.55;
@@ -639,8 +684,39 @@
       <span class="blue-text">We Sit Down and Learn Your Business.</span>
     </h1>
 
+    <!-- PadmaHQ status chip -->
+    <div class="flex justify-center mb-8">
+      <a href="https://padmahq.com" target="_blank" rel="noopener" class="padma-chip inline-flex items-center gap-3 px-5 py-2 rounded-full" style="text-decoration:none;">
+        <img src="brand_assets/padma-lotus.svg" alt="Padma" width="22" height="22" style="flex-shrink:0; filter: drop-shadow(0 0 6px rgba(240,141,77,0.75)); color:#f08d4d;">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#ffb878; animation: ping 2s cubic-bezier(0,0,0.2,1) infinite;"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2" style="background:#f08d4d;"></span>
+        </span>
+        <span class="font-cinzel text-xs tracking-widest uppercase" style="color:#ffd0a8; letter-spacing:0.18em;">PadmaHQ Live</span>
+        <span class="text-xs" style="color:rgba(255,208,168,0.45);">·</span>
+        <span class="font-cinzel text-xs" style="color:#f5b88a; letter-spacing:0.06em;">Onboarding rep agencies across Canada</span>
+        <span class="text-xs" style="color:#f08d4d;">&rarr;</span>
+      </a>
+    </div>
+    <style>
+      @keyframes ping { 75%,100% { transform: scale(2.2); opacity: 0; } }
+      .padma-chip {
+        background: linear-gradient(135deg, rgba(240,141,77,0.16), rgba(232,122,58,0.06));
+        border: 1px solid rgba(240,141,77,0.50);
+        box-shadow: 0 0 30px rgba(240,141,77,0.22), inset 0 0 16px rgba(240,141,77,0.06);
+        animation: padmaPulse 2.8s ease-in-out infinite;
+        transition: all 0.25s ease;
+      }
+      .padma-chip:hover {
+        background: linear-gradient(135deg, rgba(240,141,77,0.28), rgba(232,122,58,0.14));
+        border-color: rgba(240,141,77,0.80);
+        box-shadow: 0 0 42px rgba(240,141,77,0.50), inset 0 0 22px rgba(240,141,77,0.12);
+        transform: translateY(-1px);
+      }
+    </style>
+
     <p class="font-cinzel text-slate-400 mb-10 mx-auto" style="font-size:clamp(1rem,1.8vw,1.2rem); max-width:600px; line-height:1.78;">
-      I'm Greg Drysdale, founder of DyGarn Technical Solutions. I work directly with business owners to understand how their operation actually runs, where the pressure builds up, and what's quietly eating time and money. Then I build custom AI systems that relieve that pressure, so things flow the way they should. No templates. No generic solutions. Just tools built around your business.
+      DyGarn Technical Solutions is led by Greg Drysdale. We work directly with business owners to learn how their operation actually runs, where the pressure builds up, and what's quietly eating time and money. Then we build the tools around it. No templates. No generic solutions. PadmaHQ is the clearest example, but the same approach fits any operation that has outgrown its software.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -790,7 +866,7 @@
           </svg>
         </div>
         <h3 class="font-cinzel font-bold text-lg chrome-text mb-3">Custom Dashboards & KPIs</h3>
-        <p class="text-slate-500 text-sm leading-relaxed">Real-time visibility into the numbers that matter. I build dashboards tailored to your business or businesses, with drill-downs into each operation, all visible in one spot. Your data, your way.</p>
+        <p class="text-slate-500 text-sm leading-relaxed">Real-time visibility into the numbers that matter. We build dashboards tailored to your business or businesses, with drill-downs into each operation, all visible in one spot. Your data, your way.</p>
         <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
           <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
         </div>
@@ -844,6 +920,110 @@
         <div class="mt-5 pt-5" style="border-top:1px solid rgba(77,184,255,0.1);">
           <a href="#contact" class="font-cinzel text-xs text-sky-400 tracking-widest uppercase hover:text-sky-300 transition-colors" style="text-decoration:none;">Learn More →</a>
         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+
+<!-- ════════════════════════════════════════════
+     PADMAHQ FEATURED SECTION
+     Light "control room" band that visually breaks from the navy theme.
+     Mirrors padmahq.com mood: clean, airy, professional, product-forward.
+================================================ -->
+<section id="padma" class="relative overflow-hidden" style="background: linear-gradient(180deg, #0a1628 0%, #0d1b30 50%, #0a1628 100%); padding: 110px 24px;">
+
+  <!-- Top + bottom copper hairline to mark the band as PadmaHQ -->
+  <div class="absolute top-0 left-0 right-0" style="height:1px; background:linear-gradient(90deg, transparent, rgba(240,141,77,0.45), transparent);"></div>
+  <div class="absolute bottom-0 left-0 right-0" style="height:1px; background:linear-gradient(90deg, transparent, rgba(240,141,77,0.45), transparent);"></div>
+
+  <!-- Copper ambient glow -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 right-1/4 w-[700px] h-[700px]" style="background:radial-gradient(ellipse, rgba(240,141,77,0.10) 0%, transparent 60%);"></div>
+    <div class="absolute bottom-0 left-1/4 w-[600px] h-[600px]" style="background:radial-gradient(ellipse, rgba(217,106,42,0.08) 0%, transparent 60%);"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+
+    <!-- Eyebrow -->
+    <div class="text-center mb-12">
+      <p class="font-cinzel text-xs font-semibold tracking-[0.45em] uppercase mb-4" style="color:#f08d4d; letter-spacing:0.45em; text-shadow:0 0 14px rgba(240,141,77,0.4);">Already Live · Moving Fast</p>
+      <div class="flex items-center justify-center gap-4 mb-5">
+        <img src="brand_assets/padma-lotus.svg" alt="Padma" width="64" height="64" style="flex-shrink:0; filter: drop-shadow(0 0 22px rgba(240,141,77,0.55));">
+        <h2 class="font-cinzel font-bold" style="font-size:clamp(2rem,4.5vw,3.2rem); letter-spacing:-0.02em; color:#e8eef7; line-height:1.1; text-shadow:0 0 28px rgba(240,141,77,0.18);">
+          Padma<span style="color:#f08d4d;">HQ</span>
+        </h2>
+      </div>
+      <p class="mx-auto" style="font-family:'Inter',ui-sans-serif,system-ui,sans-serif; font-size:clamp(1rem,1.6vw,1.25rem); color:#a8b8d0; max-width:680px; line-height:1.6;">
+        The headquarters rep agencies have always wanted. One place for the way your agency actually runs. The tools you like stay.
+      </p>
+    </div>
+
+    <!-- Body grid: copy + real screenshot -->
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+
+      <!-- Left: copy + features -->
+      <div class="lg:col-span-5">
+        <p style="font-family:'Inter',ui-sans-serif,system-ui,sans-serif; color:#bccae0; font-size:1.02rem; line-height:1.7; margin-bottom:28px;">
+          Most of our time right now goes into PadmaHQ. A dedicated headquarters built for electrical and lighting rep agencies, built from the inside out. It is live, onboarding agencies across Canada, and growing fast as customers ask for new modules and custom builds for their own operations.
+        </p>
+
+        <!-- Feature grid -->
+        <div class="grid grid-cols-2 gap-3 mb-10">
+
+          <div class="rounded-md p-4" style="background:linear-gradient(145deg, rgba(20,32,52,0.6), rgba(13,27,46,0.6)); border:1px solid rgba(240,141,77,0.20);">
+            <p style="font-family:'Inter',sans-serif; font-weight:600; color:#f5c3ad; font-size:0.92rem; margin-bottom:4px;">Quotes &amp; Submittals</p>
+            <p style="font-family:'Inter',sans-serif; color:#8aa0bc; font-size:0.82rem; line-height:1.5;">Submittal-ready in seconds. Your brand on every page.</p>
+          </div>
+
+          <div class="rounded-md p-4" style="background:linear-gradient(145deg, rgba(20,32,52,0.6), rgba(13,27,46,0.6)); border:1px solid rgba(240,141,77,0.20);">
+            <p style="font-family:'Inter',sans-serif; font-weight:600; color:#f5c3ad; font-size:0.92rem; margin-bottom:4px;">Agency CRM</p>
+            <p style="font-family:'Inter',sans-serif; color:#8aa0bc; font-size:0.82rem; line-height:1.5;">Every project, distributor, and specifier in one view.</p>
+          </div>
+
+          <div class="rounded-md p-4" style="background:linear-gradient(145deg, rgba(20,32,52,0.6), rgba(13,27,46,0.6)); border:1px solid rgba(240,141,77,0.20);">
+            <p style="font-family:'Inter',sans-serif; font-weight:600; color:#f5c3ad; font-size:0.92rem; margin-bottom:4px;">Orders &amp; Reporting</p>
+            <p style="font-family:'Inter',sans-serif; color:#8aa0bc; font-size:0.82rem; line-height:1.5;">Real numbers from your real data. Live, not last quarter.</p>
+          </div>
+
+          <div class="rounded-md p-4" style="background:linear-gradient(145deg, rgba(20,32,52,0.6), rgba(13,27,46,0.6)); border:1px solid rgba(240,141,77,0.20);">
+            <p style="font-family:'Inter',sans-serif; font-weight:600; color:#f5c3ad; font-size:0.92rem; margin-bottom:4px;">Custom Modules</p>
+            <p style="font-family:'Inter',sans-serif; color:#8aa0bc; font-size:0.82rem; line-height:1.5;">We build your agency's own modules into the platform.</p>
+          </div>
+
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://padmahq.com" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-7 py-3 rounded-sm font-cinzel text-xs" style="background:linear-gradient(135deg, #f08d4d, #d96a2a); color:#ffffff; letter-spacing:0.18em; text-decoration:none; box-shadow:0 6px 28px rgba(240,141,77,0.35); transition:all 0.2s;">
+            Visit PadmaHQ &rarr;
+          </a>
+          <a href="#contact" class="inline-flex items-center justify-center px-7 py-3 rounded-sm font-cinzel text-xs" style="background:transparent; color:#f5c3ad; border:1px solid rgba(240,141,77,0.50); letter-spacing:0.18em; text-decoration:none;">
+            Talk to Our Team
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: real PadmaHQ dashboard screenshot -->
+      <div class="lg:col-span-7">
+        <div class="relative">
+          <!-- Outer copper glow halo -->
+          <div class="absolute" style="inset:-30px; background:radial-gradient(ellipse at center, rgba(240,141,77,0.20) 0%, transparent 65%); filter:blur(20px); z-index:0;"></div>
+
+          <!-- Screenshot frame -->
+          <div class="relative" style="border-radius:10px; overflow:hidden; border:1px solid rgba(240,141,77,0.30); box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(240,141,77,0.18), inset 0 0 0 1px rgba(255,255,255,0.04); z-index:1;">
+            <img src="brand_assets/padma-dashboard.png" alt="Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada." style="display:block; width:100%; height:auto;">
+          </div>
+        </div>
+
+        <!-- Caption -->
+        <p class="text-center mt-5" style="font-family:'Inter',sans-serif; font-size:0.78rem; color:#7a8aa6; letter-spacing:0.05em;">
+          Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada.
+        </p>
       </div>
 
     </div>
@@ -914,7 +1094,7 @@
             <svg class="flex-shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="#4db8ff" stroke-width="1.5"/><path d="M7 12l3.5 3.5L17 8" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <div>
               <span class="font-cinzel text-xs chrome-text tracking-wide">What you've already tried</span>
-              <p class="text-slate-500 text-xs mt-0.5">So I build on what worked and don't repeat what didn't</p>
+              <p class="text-slate-500 text-xs mt-0.5">So we build on what worked and don't repeat what didn't</p>
             </div>
           </li>
           <li class="flex items-start gap-3">
@@ -956,7 +1136,7 @@
         <!-- Callout -->
         <div class="rounded-sm p-6" style="background:linear-gradient(135deg, rgba(77,184,255,0.07), rgba(77,184,255,0.03)); border:1px solid rgba(77,184,255,0.25);">
           <p class="font-cinzel text-xs text-sky-400 tracking-widest uppercase mb-2">No Commitment. Just Clarity.</p>
-          <p class="text-slate-400 text-sm leading-relaxed">There's no obligation to move forward - and if AI genuinely isn't the right fit for your business right now, I'll tell you that. The goal isn't a sale. It's honest answers. Most business leaders leave with a clearer picture of their operation than they expected - and that alone is worth the 30 minutes.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">There's no obligation to move forward. If AI genuinely isn't the right fit for your business right now, we'll tell you that. The goal isn't a sale. It's honest answers. Most business leaders leave with a clearer picture of their operation than they expected, and that alone is worth the 30 minutes.</p>
         </div>
 
       </div>
@@ -981,8 +1161,8 @@
   <div class="max-w-6xl mx-auto">
 
     <div class="text-center mb-16">
-      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">How I Work</p>
-      <h2 class="font-cinzel font-bold chrome-text mb-4" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">My Process</h2>
+      <p class="font-cinzel text-sm font-semibold tracking-[0.4em] text-sky-400 uppercase mb-4 pulse-glow">How We Work</p>
+      <h2 class="font-cinzel font-bold chrome-text mb-4" style="font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-0.02em;">Our Process</h2>
       <p class="text-slate-500 max-w-xl mx-auto" style="line-height:1.75;">Five focused phases, from the first conversation to ongoing partnership. Every step is built around your business.</p>
     </div>
 
@@ -1073,8 +1253,8 @@
         <div class="relative">
           <div class="absolute inset-0 rounded-full" style="background:radial-gradient(ellipse, rgba(77,184,255,0.18) 0%, transparent 70%); transform:scale(1.4);"></div>
           <img
-            src="/brand_assets/final logo .jpeg"
-            alt="Greg Drysdale - Founder of DyGarn Technical Solutions, AI consultant with 27+ years in technical sales"
+            src="brand_assets/final logo .jpeg"
+            alt="Greg Drysdale, founder of DyGarn Technical Solutions. 25+ years inside electrical and lighting rep agencies."
             class="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full object-cover float-anim"
             style="border:2px solid rgba(77,184,255,0.4); box-shadow: 0 0 60px rgba(77,184,255,0.3), 0 0 120px rgba(77,184,255,0.12), 0 24px 60px rgba(0,0,0,0.6);"
           >
@@ -1093,8 +1273,8 @@
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#4db8ff" stroke-width="1.5"/></svg>
             </div>
             <div>
-              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">27+ Years in Technical Sales</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">Nearly three decades in technical sales and the technology industry. I understand how businesses buy, adopt, and succeed with new technology because I've been on every side of that conversation.</p>
+              <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">25+ Years Inside Lighting &amp; Electrical</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">Real time inside the industry, on every side of the business. That experience shapes everything we build.</p>
             </div>
           </div>
 
@@ -1104,7 +1284,7 @@
             </div>
             <div>
               <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Custom-Built, Not Off-the-Shelf</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">No templates, no one-size-fits-all software. Every system is built from the ground up for your specific business. I move quickly without cutting corners, and most clients see their first systems live within days, not months.</p>
+              <p class="text-slate-500 text-sm leading-relaxed">No templates, no one-size-fits-all software. Every system is built from the ground up for your specific business. We move quickly without cutting corners, and first versions are usually live within weeks.</p>
             </div>
           </div>
 
@@ -1114,7 +1294,7 @@
             </div>
             <div>
               <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Atlantic Canada Based, In-Person Service</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">I'm local and I show up. When it matters, I'm in the room with you and your team, not on a screen three time zones away. That's how the best work gets done.</p>
+              <p class="text-slate-500 text-sm leading-relaxed">We're local and we show up. When it matters, we're in the room with you and your team, not on a screen three time zones away. That's how the best work gets done.</p>
             </div>
           </div>
 
@@ -1124,7 +1304,7 @@
             </div>
             <div>
               <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Ongoing Partnership</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">I don't disappear post-launch. Your success is my success, with continuous support, optimization, and growth planning. Your data stays private, protected, and fully under your control.</p>
+              <p class="text-slate-500 text-sm leading-relaxed">We don't disappear post-launch. Your success is ours. Continuous support, optimization, and growth planning. Your data stays private, protected, and fully under your control.</p>
             </div>
           </div>
 
@@ -1134,7 +1314,7 @@
             </div>
             <div>
               <h4 class="font-cinzel font-bold text-sm chrome-text mb-1">Government Funding Available</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">Canadian businesses may qualify for government programs that cover 50-75% of AI project costs. I'll help you navigate what's available.</p>
+              <p class="text-slate-500 text-sm leading-relaxed">Canadian businesses may qualify for government programs that cover 50-75% of AI project costs. We'll help you navigate what's available.</p>
             </div>
           </div>
 
@@ -1161,15 +1341,19 @@
 
     <div class="grid md:grid-cols-5 gap-10 items-center">
 
-      <!-- Left: Photo placeholder / logo -->
+      <!-- Left: Founder headshot -->
       <div class="md:col-span-2 flex justify-center">
         <div class="relative">
-          <div class="absolute inset-0 rounded-full" style="background:radial-gradient(ellipse, rgba(77,184,255,0.15) 0%, transparent 70%); transform:scale(1.3);"></div>
-          <div class="relative z-10 w-56 h-56 md:w-64 md:h-64 rounded-full flex items-center justify-center" style="border:2px solid rgba(77,184,255,0.35); box-shadow: 0 0 50px rgba(77,184,255,0.2), 0 24px 60px rgba(0,0,0,0.5); background: linear-gradient(145deg, rgba(20,32,52,0.95), rgba(13,27,46,0.95));">
-            <div class="text-center px-6">
-              <p class="font-cinzel-deco font-bold text-3xl blue-text mb-1">GD</p>
-              <p class="font-cinzel text-xs text-slate-500 tracking-widest uppercase">Founder</p>
-            </div>
+          <div class="absolute inset-0 rounded-full" style="background:radial-gradient(ellipse, rgba(77,184,255,0.18) 0%, transparent 70%); transform:scale(1.35);"></div>
+          <img
+            src="brand_assets/greg-headshot.jpeg"
+            alt="Greg Drysdale, Founder of DyGarn Technical Solutions"
+            class="relative z-10 w-56 h-56 md:w-64 md:h-64 rounded-full object-cover"
+            style="object-position: center 22%; border:2px solid rgba(77,184,255,0.40); box-shadow: 0 0 50px rgba(77,184,255,0.22), 0 24px 60px rgba(0,0,0,0.55);"
+          >
+          <!-- Small "Founder" badge anchored to bottom of the circle -->
+          <div class="absolute z-20" style="bottom:-6px; left:50%; transform:translateX(-50%); background:linear-gradient(145deg, rgba(20,32,52,0.98), rgba(13,27,46,0.98)); border:1px solid rgba(77,184,255,0.35); border-radius:999px; padding:5px 16px; box-shadow:0 6px 18px rgba(0,0,0,0.5);">
+            <p class="font-cinzel text-xs tracking-widest uppercase" style="color:#7dd3fc; letter-spacing:0.20em;">Founder</p>
           </div>
         </div>
       </div>
@@ -1177,23 +1361,26 @@
       <!-- Right: Bio -->
       <div class="md:col-span-3">
         <p class="text-slate-400 text-sm leading-relaxed mb-5">
-          I'm Greg Drysdale - founder of DyGarn Technical Solutions and a technical sales veteran with 27+ years in the technology industry. I've spent my career on the front lines of B2B sales, helping businesses adopt new technology across Atlantic Canada and beyond.
+          I'm Greg Drysdale, founder of DyGarn Technical Solutions. I spent most of my career inside the electrical and lighting rep-agency world, on every side of the business, and was in the room for every major software migration along the way. That is where I learned the difference between software that fits how a business actually runs and software that fights it every day.
         </p>
         <p class="text-slate-400 text-sm leading-relaxed mb-5">
-          I started DyGarn because I kept seeing the same problem: small and mid-sized businesses know AI could help them, but they don't know where to start - and the solutions out there are either too generic, too expensive, or too complicated. So I build the tools myself. Custom. Practical. Designed around how your business actually runs.
+          That experience is why I started DyGarn. Small and mid sized businesses know technology could give them their time back. They just need someone who understands their work, not only the code. So we sit down with owners, learn how the operation actually runs, and build the tools around them.
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">
+          <a href="https://padmahq.com" target="_blank" rel="noopener" style="color:#7dd3fc; text-decoration:underline; text-decoration-color:rgba(125,211,252,0.45);">PadmaHQ</a> is the clearest example. A dedicated headquarters built for rep agencies, built from the inside out. It is live now, onboarding agencies across Canada, and we work alongside each one to add custom modules as they grow.
         </p>
         <p class="text-slate-400 text-sm leading-relaxed mb-8">
-          When you work with DyGarn, you work directly with me. No account managers, no handoffs, no layers. I learn your business, I build what you need, and I make sure it works. And I don't disappear after lunch - or after launch. Every system I build comes with me behind it, maintaining, improving, and making sure it keeps delivering.
+          When you work with DyGarn, you work directly with me and my team. No account managers. No handoffs. We learn your business, build what you need, and stay behind it long after launch.
         </p>
 
         <div class="grid grid-cols-2 gap-4">
           <div class="rounded-sm p-4" style="background:rgba(77,184,255,0.05); border:1px solid rgba(77,184,255,0.15);">
-            <p class="font-cinzel-deco font-bold text-xl blue-text mb-1">27+</p>
-            <p class="font-cinzel text-xs text-slate-500 tracking-widest uppercase">Years in Tech Sales</p>
+            <p class="font-cinzel-deco font-bold text-xl blue-text mb-1">25+</p>
+            <p class="font-cinzel text-xs text-slate-500 tracking-widest uppercase">Years Inside Lighting &amp; Electrical</p>
           </div>
           <div class="rounded-sm p-4" style="background:rgba(77,184,255,0.05); border:1px solid rgba(77,184,255,0.15);">
             <p class="font-cinzel-deco font-bold text-xl blue-text mb-1">100%</p>
-            <p class="font-cinzel text-xs text-slate-500 tracking-widest uppercase">Direct Access to Me</p>
+            <p class="font-cinzel text-xs text-slate-500 tracking-widest uppercase">Direct Access to Greg &amp; Team</p>
           </div>
         </div>
       </div>
@@ -1224,7 +1411,7 @@
           Do I need technical knowledge to work with you?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Not at all. I handle all the technical complexity - you just need to know your business goals. I translate your needs into working AI solutions and guide you through every step.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Not at all. We handle all the technical complexity. You just need to know your business goals. We translate your needs into working systems and guide you through every step.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1232,7 +1419,7 @@
           How long does a typical project take?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Most initial AI systems are live within 2-6 weeks depending on scope and complexity. I'll give you a precise timeline after our discovery call - and I stick to it.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Most initial systems are live within 2-6 weeks depending on scope and complexity. You'll get a precise timeline after our discovery call, and we stick to it.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1240,7 +1427,7 @@
           What kinds of businesses do you work with?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">I work primarily with small and mid-sized businesses - construction, trades, manufacturing, real estate, and professional services. If your business has processes that eat up time or money, there's likely an AI solution that fits.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">We work primarily with small and mid-sized businesses. Electrical and lighting rep agencies, contractors and trades, manufacturing, real estate, and professional services. If your business has processes that eat up time or money, there's likely a fit.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1248,7 +1435,7 @@
           Is my data safe and private?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Absolutely. I build with security-first architecture and follow industry best practices for data protection. Your data is never shared, sold, or used to train public models.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Absolutely. We build with security-first architecture and follow industry best practices for data protection. Your data is never shared, sold, or used to train public models.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1256,7 +1443,7 @@
           What's the investment to get started?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Pricing depends on the scope and complexity of your project. Book a discovery call and I'll give you transparent, honest pricing - no surprises, no hidden fees.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Pricing depends on the scope and complexity of your project. Book a discovery call and you'll get transparent, honest pricing. No surprises. No hidden fees.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1264,7 +1451,7 @@
           What is the discovery call and what does it cost?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">The discovery call is a 30-minute conversation - not a slide deck, not a generic assessment. I dig into your specific situation, where your business is losing time, and what's holding back your growth. From there, we figure out what to do first, what to do later, and what's actually worth the investment. No templates, no predetermined outcomes - just a real conversation built around your situation.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">The discovery call is a 30-minute conversation. Not a slide deck, not a generic assessment. We dig into your specific situation, where your business is losing time, and what's holding back your growth. From there, we figure out what to do first, what to do later, and what's actually worth the investment. No templates, no predetermined outcomes. Just a real conversation built around your situation.</p>
       </details>
 
       <details class="rounded-sm" style="background:rgba(20,32,52,0.8); border:1px solid rgba(77,184,255,0.12);">
@@ -1272,7 +1459,7 @@
           Do I need to be technical to benefit from the discovery call?
           <svg class="chevron flex-shrink-0 ml-4" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Not at all. The discovery call is designed for business owners and operators, not IT teams. You don't need to understand how AI works - you just need to know your business. I handle the technical side and translate everything into plain-English recommendations focused on outcomes and ROI.</p>
+        <p class="px-6 pb-6 text-slate-500 text-sm leading-relaxed">Not at all. The discovery call is designed for business owners and operators, not IT teams. You don't need to understand how AI works. You just need to know your business. We handle the technical side and translate everything into plain-English recommendations focused on outcomes and ROI.</p>
       </details>
 
     </div>
@@ -1306,7 +1493,7 @@
     </h2>
 
     <p class="text-slate-400 mb-10 mx-auto" style="max-width:520px; line-height:1.78;">
-      Tell me a bit about your business and what's on your plate. I'll personally review your information and reach out to see how we can help.
+      Tell us a bit about your business and what's on your plate. We'll personally review your information and reach out to see how we can help.
     </p>
 
     <!-- Contact form -->
@@ -1427,7 +1614,7 @@
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img src="/brand_assets/corner_logo.jpeg" alt="DyGarn" class="w-20 h-20 rounded-full object-cover" style="border:1px solid rgba(77,184,255,0.3);">
+          <img src="brand_assets/corner_logo.jpeg" alt="DyGarn" class="w-20 h-20 rounded-full object-cover" style="border:1px solid rgba(77,184,255,0.3);">
           <span class="font-brand text-2xl chrome-text font-bold">DyGarn Technical Solutions</span>
         </div>
         <p class="text-slate-600 text-sm leading-relaxed max-w-xs">Technical and data consultancy helping small and mid-sized businesses get more out of the software, systems, and data they already rely on. Built by Greg Drysdale in Atlantic Canada.</p>
