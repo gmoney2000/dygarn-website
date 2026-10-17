@@ -493,6 +493,14 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg-base); }
     ::-webkit-scrollbar-thumb { background: rgba(77,184,255,0.25); border-radius: 3px; }
+    /* NEMRA27 strip in the PadmaHQ band. NEMRA's logos are dark / blue / green on transparent: light cards. */
+    .nemra-strip { display:grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap:40px; align-items:center; padding:32px; border-radius:10px; background:linear-gradient(145deg, rgba(20,32,52,0.75), rgba(13,27,46,0.75)); border:1px solid rgba(240,141,77,0.30); box-shadow:0 20px 60px rgba(0,0,0,0.45); }
+    .nemra-strip-logo { background:#f7f3ea; border-radius:8px; padding:24px 28px; }
+    .nemra-strip-logo img { display:block; width:100%; height:auto; }
+    .nemra-strip-badge { display:inline-flex; align-items:center; gap:10px; background:#f7f3ea; border-radius:999px; padding:6px 16px 6px 12px; text-decoration:none; }
+    .nemra-strip-badge img { height:26px; width:auto; display:block; }
+    .nemra-strip-badge span { font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#1b2236; }
+    @media (max-width: 860px) { .nemra-strip { grid-template-columns: 1fr; gap:24px; padding:22px; } }
     /* PadmaHQ nav link: copper/orange lotus tone matching padmahq.com brand mark */
     .padma-nav { display: inline-flex; align-items: center; gap: 8px; }
     .padma-mark { flex-shrink: 0; filter: drop-shadow(0 0 4px rgba(240,141,77,0.65)); }
@@ -645,27 +653,29 @@
 
     <!-- PadmaHQ status chip -->
     <div class="flex justify-center mb-8">
-      <a href="https://padmahq.com" target="_blank" rel="noopener" class="padma-chip inline-flex items-center gap-3 px-5 py-2 rounded-full" style="text-decoration:none;">
-        <img src="brand_assets/padma-lotus.svg" alt="Padma" width="22" height="22" style="flex-shrink:0; filter: drop-shadow(0 0 6px rgba(240,141,77,0.75)); color:#f08d4d;">
+      <a href="https://padmahq.com" target="_blank" rel="noopener" class="padma-chip inline-flex flex-wrap justify-center items-center gap-x-3 gap-y-1 px-7 py-3" style="text-decoration:none;">
+        <img src="brand_assets/padma-lotus-bright.svg" alt="Padma" width="56" height="40" style="flex-shrink:0; filter: drop-shadow(0 0 8px rgba(240,141,77,0.75)); color:#f08d4d;">
         <span class="relative flex h-2 w-2">
           <span class="absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#ffb878; animation: ping 2s cubic-bezier(0,0,0.2,1) infinite;"></span>
           <span class="relative inline-flex rounded-full h-2 w-2" style="background:#f08d4d;"></span>
         </span>
-        <span class="font-cinzel text-xs tracking-widest uppercase" style="color:#ffd0a8; letter-spacing:0.18em;">PadmaHQ Live</span>
-        <span class="text-xs" style="color:rgba(255,208,168,0.45);">·</span>
-        <span class="font-cinzel text-xs" style="color:#f5b88a; letter-spacing:0.06em;">Onboarding rep agencies across Canada</span>
-        <span class="text-xs" style="color:#f08d4d;">&rarr;</span>
+        <span class="font-cinzel text-sm tracking-widest uppercase" style="color:#ffd0a8; letter-spacing:0.18em; font-weight:700;">PadmaHQ Live</span>
+        <span class="text-sm hidden sm:inline" style="color:rgba(255,208,168,0.45);">-</span>
+        <span class="font-cinzel text-sm" style="color:#f5b88a; letter-spacing:0.06em;">Across Canada - now onboarding U.S. agencies</span>
+        <span class="text-sm hidden sm:inline" style="color:#f08d4d;">&rarr;</span>
       </a>
     </div>
     <style>
       @keyframes ping { 75%,100% { transform: scale(2.2); opacity: 0; } }
       .padma-chip {
+        border-radius: 999px;
         background: linear-gradient(135deg, rgba(240,141,77,0.16), rgba(232,122,58,0.06));
         border: 1px solid rgba(240,141,77,0.50);
         box-shadow: 0 0 30px rgba(240,141,77,0.22), inset 0 0 16px rgba(240,141,77,0.06);
         animation: padmaPulse 2.8s ease-in-out infinite;
         transition: all 0.25s ease;
       }
+      @media (max-width: 640px) { .padma-chip { border-radius: 22px; } }
       .padma-chip:hover {
         background: linear-gradient(135deg, rgba(240,141,77,0.28), rgba(232,122,58,0.14));
         border-color: rgba(240,141,77,0.80);
@@ -701,6 +711,35 @@
      Light "control room" band that visually breaks from the navy theme.
      Mirrors padmahq.com mood: clean, airy, professional, product-forward.
 ================================================ -->
+<!-- NEMRA27 (until the show, Feb 2027) - right under the hero -->
+<section class="relative" style="background: linear-gradient(180deg, #0a1628 0%, #0d1b30 100%); padding: 72px 24px 24px;">
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- NEMRA27 strip (until the show, Feb 2027) -->
+    <div id="nemra27" class="nemra-strip">
+      <div class="nemra-strip-logo">
+        <img src="brand_assets/nemra27-logo.png" alt="NEMRA27 - Setting the Standard" width="1000" height="617" loading="lazy">
+      </div>
+      <div class="nemra-strip-copy">
+        <p class="font-cinzel text-xs font-semibold uppercase mb-3" style="color:#f08d4d; letter-spacing:0.35em;">See us in Dallas</p>
+        <h3 class="font-cinzel font-bold mb-3" style="font-size:clamp(1.4rem,2.6vw,2rem); color:#e8eef7; line-height:1.2;">
+          PadmaHQ is an approved <span style="color:#f08d4d;">NEMRA Service Provider</span>.
+        </h3>
+        <p style="font-family:'Inter',ui-sans-serif,system-ui,sans-serif; color:#bccae0; font-size:1rem; line-height:1.65; margin-bottom:20px;">
+          Find us in the Service Provider Showcase at NEMRA27 - Hilton Anatole, Dallas, January 31 to February 3, 2027.
+          Book 30 minutes before the show and we'll walk your agency through PadmaHQ.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="https://calendly.com/greg-dygarn/new-meeting" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-7 py-3 rounded-sm font-cinzel text-xs" style="background:linear-gradient(135deg, #f08d4d, #d96a2a); color:#0a1628; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;">Book a meeting at NEMRA27 &rarr;</a>
+          <a href="https://www.nemra.org/" target="_blank" rel="noopener" class="nemra-strip-badge" aria-label="NEMRA">
+            <img src="brand_assets/nemra-logo.png" alt="NEMRA" width="281" height="95" loading="lazy">
+            <span>Service Provider</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="padma" class="relative overflow-hidden" style="background: linear-gradient(180deg, #0a1628 0%, #0d1b30 50%, #0a1628 100%); padding: 110px 24px;">
 
   <!-- Top + bottom copper hairline to mark the band as PadmaHQ -->
@@ -735,7 +774,7 @@
       <!-- Left: copy + features -->
       <div class="lg:col-span-5">
         <p style="font-family:'Inter',ui-sans-serif,system-ui,sans-serif; color:#bccae0; font-size:1.02rem; line-height:1.7; margin-bottom:28px;">
-          Most of our time right now goes into PadmaHQ. A dedicated headquarters built for manufacturer's rep agencies of every type, built from the inside out. It is live, onboarding agencies across Canada, and growing fast as customers ask for new modules and custom builds for their own operations.
+          Most of our time right now goes into PadmaHQ. A dedicated headquarters built for manufacturer's rep agencies of every type, built from the inside out. It is live across Canada, now onboarding agencies in the U.S., and growing fast as customers ask for new modules and custom builds for their own operations.
         </p>
 
         <!-- Feature grid -->
@@ -782,18 +821,19 @@
 
           <!-- Screenshot frame -->
           <div class="relative" style="border-radius:10px; overflow:hidden; border:1px solid rgba(240,141,77,0.30); box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(240,141,77,0.18), inset 0 0 0 1px rgba(255,255,255,0.04); z-index:1;">
-            <img src="brand_assets/padma-dashboard.png" alt="Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada." style="display:block; width:100%; height:auto;">
+            <img src="brand_assets/padma-dashboard.png" alt="Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada, now onboarding in the U.S." style="display:block; width:100%; height:auto;">
           </div>
         </div>
 
         <!-- Caption -->
         <p class="text-center mt-5" style="font-family:'Inter',sans-serif; font-size:0.78rem; color:#7a8aa6; letter-spacing:0.05em;">
-          Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada.
+          Inside the PadmaHQ Owner Dashboard. Live with rep agencies across Canada, now onboarding in the U.S.
         </p>
       </div>
 
     </div>
-  </div>
+  
+</div>
 </section>
 
 
@@ -1298,7 +1338,7 @@
           That experience is why I started DyGarn. Small and mid sized businesses know technology could give them their time back. They just need someone who understands their work, not only the code. So we sit down with owners, learn how the operation actually runs, and build the tools around them.
         </p>
         <p class="text-slate-400 text-sm leading-relaxed mb-5">
-          <a href="https://padmahq.com" target="_blank" rel="noopener" style="color:#7dd3fc; text-decoration:underline; text-decoration-color:rgba(125,211,252,0.45);">PadmaHQ</a> is the clearest example. A dedicated headquarters built for rep agencies, built from the inside out. It is live now, onboarding agencies across Canada, and we work alongside each one to add custom modules as they grow.
+          <a href="https://padmahq.com" target="_blank" rel="noopener" style="color:#7dd3fc; text-decoration:underline; text-decoration-color:rgba(125,211,252,0.45);">PadmaHQ</a> is the clearest example. A dedicated headquarters built for rep agencies, built from the inside out. It is live now across Canada, onboarding agencies in the U.S. too, and we work alongside each one to add custom modules as they grow.
         </p>
         <p class="text-slate-400 text-sm leading-relaxed mb-8">
           When you work with DyGarn, you work directly with me and my team. No account managers. No handoffs. We learn your business, build what you need, and stay behind it long after launch.
